@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Halodi.PackageRegistry.UI
 {
-    static class MyCustomSettingsIMGUIRegister
+    static class CredentialManagerSettingsProvider
     {
         [SettingsProvider]
         public static SettingsProvider CreateMyCustomSettingsProvider()
