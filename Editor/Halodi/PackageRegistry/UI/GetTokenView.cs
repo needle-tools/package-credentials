@@ -25,7 +25,8 @@ namespace Halodi.PackageRegistry.UI
     {
         private static TokenMethod[] methods = {
                 new TokenMethod("npm login", "Registry username", "Registry password", GetNPMLoginToken),
-                new TokenMethod("bintray", "Bintray username", "Bintray API key", GetBintrayToken)
+                new TokenMethod("bintray", "Bintray username", "Bintray API key", GetBintrayToken),
+                // TODO adjust TokenMethod to allow for opening GitHub token URL: https://github.com/settings/tokens/new
             };
 
 
@@ -114,11 +115,11 @@ namespace Halodi.PackageRegistry.UI
         internal static int CreateGUI(int selectedIndex, ScopedRegistry registry)
         {
 
-            EditorGUILayout.LabelField("Generate token", EditorStyles.whiteLargeLabel);
+            EditorGUILayout.LabelField("Generate token", EditorStyles.largeLabel);
             EditorGUILayout.BeginHorizontal();
             selectedIndex = EditorGUILayout.Popup(new GUIContent("Method"), selectedIndex, methods);
 
-            if(GUILayout.Button("Get token"))
+            if(GUILayout.Button("Login & get auth token"))
             {
                 CreateWindow(methods[selectedIndex], registry);
             }

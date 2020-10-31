@@ -52,6 +52,7 @@ namespace Halodi.PackageRegistry.UI
         {
             if (initialized)
             {
+                EditorGUILayout.Space();
                 if (createNew)
                 {
                     EditorGUILayout.LabelField("Add scoped registry ", EditorStyles.whiteLargeLabel);
@@ -73,7 +74,7 @@ namespace Halodi.PackageRegistry.UI
 
                 if (scopeList == null)
                 {
-                    scopeList = new ReorderableList(registry.scopes, typeof(string), true, false, true, true)
+                    scopeList = new ReorderableList(registry.scopes, typeof(string), true, true, true, true)
                     {
                         drawHeaderCallback = rect =>
                         { 
@@ -92,6 +93,9 @@ namespace Halodi.PackageRegistry.UI
 
                 scopeList.DoLayoutList();
 
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Authentication / Credentials", EditorStyles.whiteLargeLabel);
+                
                 registry.auth = EditorGUILayout.Toggle("Always auth: ", registry.auth);
                 registry.token = EditorGUILayout.TextField("Token: ", registry.token);
 

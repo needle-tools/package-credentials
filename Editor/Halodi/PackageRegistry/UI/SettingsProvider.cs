@@ -20,15 +20,16 @@ namespace Halodi.PackageRegistry.UI
                 activateHandler = (str, v) =>
                 {
                     registryManager = new RegistryManager();
-                    credentialDrawer = CredentialManagerView.GetCredentialList(registryManager.credentialManager);
                     registryDrawer = RegistryManagerView.GetRegistryListView(registryManager);
+                    credentialDrawer = CredentialManagerView.GetCredentialList(registryManager.credentialManager);
                 },
                 guiHandler = (searchContext) =>
                 {
                     EditorGUILayout.Space();
-                    credentialDrawer.DoLayoutList();
-                    EditorGUILayout.Space();
                     registryDrawer.DoLayoutList();
+                    
+                    EditorGUILayout.Space();
+                    credentialDrawer.DoLayoutList();
                 },
                 // Populate the search keywords to enable smart search filtering and label highlighting
                 keywords = new HashSet<string>(new[] { "UPM", "NPM", "Credentials", "Packages", "Authentication", "Scoped Registry" })

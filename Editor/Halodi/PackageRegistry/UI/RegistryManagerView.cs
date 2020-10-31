@@ -37,24 +37,30 @@ namespace Halodi.PackageRegistry.UI
             {
                 drawHeaderCallback = rect =>
                 {
-                    GUI.Label(rect, "Scoped Registries");
+                    GUI.Label(rect, "Scoped Registries in this project");
                 },
+                elementHeight = 60,
                 drawElementCallback = (rect, index, active, focused) =>
                 {
                     var registry = registryList.list[index] as ScopedRegistry;
                     if (registry == null) return;
+                    bool registryHasAuth = !string.IsNullOrEmpty(registry.token) && registry.isValidCredential();
 
                     var rect2 = rect;
+                    rect.width -= 60;
+                    rect.height = 20;
+                    GUI.Label(rect, registry.name + " (" + registry.scopes.Count + " scopes)", EditorStyles.boldLabel);
+                    rect.y += 20;
+                    GUI.Label(rect, registry.url);
+                    rect.y += 20;
+                    EditorGUI.BeginDisabledGroup(true);
+                    GUI.Toggle(rect, registryHasAuth, "Has Credentials");
+                    EditorGUI.EndDisabledGroup();
+                    
+                    rect2.x = rect2.xMax - 60;
+                    rect2.height = 20;
                     rect2.width = 60;
-                    EditorGUI.ToggleLeft(rect2, "Auth", !string.IsNullOrEmpty(registry.token) && registry.isValidCredential());
-                    
-                    rect.x += 60;
-                    rect.width -= 120;
-                    EditorGUI.LabelField(rect, registry.name + ": " + registry.url);
-                    
-                    rect.x = rect.xMax;
-                    rect.width = 60;
-                    if (GUI.Button(rect, "Edit"))
+                    if (GUI.Button(rect2, "Edit"))
                     {
                         ScopedRegistryEditorView registryEditor = EditorWindow.GetWindow<ScopedRegistryEditorView>(true, "Edit registry", true);
                         registryEditor.Edit(registry, registryManager);
@@ -67,7 +73,9 @@ namespace Halodi.PackageRegistry.UI
                 },
                 onRemoveCallback = list =>
                 {
-                    registryManager.Remove(registryManager.registries[list.index]);
+                    Debug.Log("index to remove: " + list.index);
+                    var entry = list.list[list.index] as ScopedRegistry;
+                    registryManager.Remove(entry);
                 }
             };
             return registryList;
