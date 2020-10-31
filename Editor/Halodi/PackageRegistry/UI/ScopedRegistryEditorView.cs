@@ -56,10 +56,10 @@ namespace Halodi.PackageRegistry.UI
                 if (createNew)
                 {
                     EditorGUILayout.LabelField("Add scoped registry ", EditorStyles.whiteLargeLabel);
-                    registry.name = EditorGUILayout.TextField("name: ", registry.name);
+                    registry.name = EditorGUILayout.TextField("Name", registry.name);
 
                     EditorGUI.BeginChangeCheck();
-                    registry.url = EditorGUILayout.TextField("url: ", registry.url);
+                    registry.url = EditorGUILayout.TextField("URL", registry.url);
                     if (EditorGUI.EndChangeCheck())
                     {
                         UpdateCredential();
@@ -68,18 +68,14 @@ namespace Halodi.PackageRegistry.UI
                 else
                 {
                     EditorGUILayout.LabelField("Edit scoped registry", EditorStyles.whiteLargeLabel);
-                    EditorGUILayout.LabelField("Name: " + registry.name);
-                    EditorGUILayout.LabelField("url: " + registry.url);
+                    EditorGUILayout.LabelField("Name", registry.name);
+                    EditorGUILayout.LabelField("URL", registry.url);
                 }
 
                 if (scopeList == null)
                 {
-                    scopeList = new ReorderableList(registry.scopes, typeof(string), true, true, true, true)
+                    scopeList = new ReorderableList(registry.scopes, typeof(string), true, false, true, true)
                     {
-                        drawHeaderCallback = rect =>
-                        { 
-                            GUI.Label(rect, "Package Scopes");
-                        },
                         drawElementCallback = (rect, index, active, focused) =>
                         {
                             registry.scopes[index] = EditorGUI.TextField(rect, registry.scopes[index]);
@@ -91,13 +87,18 @@ namespace Halodi.PackageRegistry.UI
                     };
                 }
 
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.PrefixLabel("Package Scopes");
+                EditorGUILayout.BeginVertical();
                 scopeList.DoLayoutList();
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Authentication / Credentials", EditorStyles.whiteLargeLabel);
                 
-                registry.auth = EditorGUILayout.Toggle("Always auth: ", registry.auth);
-                registry.token = EditorGUILayout.TextField("Token: ", registry.token);
+                registry.auth = EditorGUILayout.Toggle("Always auth", registry.auth);
+                registry.token = EditorGUILayout.TextField("Token", registry.token);
 
                 EditorGUILayout.Space();
 
