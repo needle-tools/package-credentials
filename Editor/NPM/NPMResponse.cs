@@ -1,4 +1,4 @@
-namespace PackageCredentials.NPM
+namespace Needle.PackageCredentials.NPM
 {
     [System.Serializable]
     public class NPMResponse

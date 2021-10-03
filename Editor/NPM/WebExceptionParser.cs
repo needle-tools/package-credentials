@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace PackageCredentials.NPM
+namespace Needle.PackageCredentials.NPM
 {
     public class WebExceptionParser
     {

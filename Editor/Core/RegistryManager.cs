@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace PackageCredentials.Core
+namespace Needle.PackageCredentials.Core
 {
     public class RegistryManager
     {

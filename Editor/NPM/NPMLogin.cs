@@ -3,7 +3,7 @@ using System.Net;
 using System.Text;
 using UnityEngine;
 
-namespace PackageCredentials.NPM
+namespace Needle.PackageCredentials.NPM
 {
     [System.Serializable]
     internal class NPMLoginRequest

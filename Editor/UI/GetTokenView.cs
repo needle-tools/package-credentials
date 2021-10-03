@@ -1,9 +1,9 @@
-using PackageCredentials.Core;
-using PackageCredentials.NPM;
+using Needle.PackageCredentials.Core;
+using Needle.PackageCredentials.NPM;
 using UnityEditor;
 using UnityEngine;
 
-namespace PackageCredentials.UI
+namespace Needle.PackageCredentials.UI
 {
     internal class TokenMethod : GUIContent
     {

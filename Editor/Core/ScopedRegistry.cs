@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PackageCredentials.Core
+namespace Needle.PackageCredentials.Core
 {
     [System.Serializable]
     public class ScopedRegistry

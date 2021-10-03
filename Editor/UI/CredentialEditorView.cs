@@ -1,9 +1,9 @@
 using System;
-using PackageCredentials.Core;
+using Needle.PackageCredentials.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace PackageCredentials.UI
+namespace Needle.PackageCredentials.UI
 {
     class CredentialEditorView : EditorWindow
     {

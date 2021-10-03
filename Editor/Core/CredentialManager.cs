@@ -7,7 +7,7 @@ using Tomlyn.Model;
 using Tomlyn.Syntax;
 using UnityEngine;
 
-namespace PackageCredentials.Core
+namespace Needle.PackageCredentials.Core
 {
     public class NPMCredential
     {
