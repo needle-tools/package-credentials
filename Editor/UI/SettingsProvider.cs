@@ -16,7 +16,6 @@ namespace Halodi.PackageRegistry.UI
         {
             RegistryManager registryManager;
             ReorderableList credentialDrawer = null;
-            ReorderableList registryDrawer = null;
             
             var provider = new SettingsProvider("Project/Package Manager/Credentials", SettingsScope.Project)
             {
@@ -24,15 +23,11 @@ namespace Halodi.PackageRegistry.UI
                 activateHandler = (str, v) =>
                 {
                     registryManager = new RegistryManager();
-                    registryDrawer = RegistryManagerView.GetRegistryList(registryManager);
                     credentialDrawer = CredentialManagerView.GetCredentialList(registryManager.credentialManager);
                 },
                 guiHandler = (searchContext) =>
                 {
                     ThirdPartyInfo();
-
-                    EditorGUILayout.Space();
-                    registryDrawer.DoLayoutList();
                     
                     EditorGUILayout.Space();
                     credentialDrawer.DoLayoutList();
