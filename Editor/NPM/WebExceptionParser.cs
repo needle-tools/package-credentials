@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Halodi.PackageRegistry.NPM
+namespace PackageCredentials.NPM
 {
     public class WebExceptionParser
     {

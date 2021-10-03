@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Halodi.PackageRegistry.Core;
+using PackageCredentials.Core;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditor.SceneManagement;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Halodi.PackageRegistry.UI
+namespace PackageCredentials.UI
 {
     static class CredentialManagerSettingsProvider
     {

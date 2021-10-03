@@ -1,10 +1,9 @@
-using System;
-using Halodi.PackageRegistry.Core;
-using Halodi.PackageRegistry.NPM;
+using PackageCredentials.Core;
+using PackageCredentials.NPM;
 using UnityEditor;
 using UnityEngine;
 
-namespace Halodi.PackageRegistry.UI
+namespace PackageCredentials.UI
 {
     internal class TokenMethod : GUIContent
     {

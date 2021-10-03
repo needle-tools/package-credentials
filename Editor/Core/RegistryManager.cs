@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Halodi.PackageRegistry.Core
+namespace PackageCredentials.Core
 {
     public class RegistryManager
     {

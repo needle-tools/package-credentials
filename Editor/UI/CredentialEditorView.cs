@@ -1,10 +1,9 @@
-
 using System;
-using Halodi.PackageRegistry.Core;
+using PackageCredentials.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace Halodi.PackageRegistry.UI
+namespace PackageCredentials.UI
 {
     class CredentialEditorView : EditorWindow
     {

@@ -1,12 +1,9 @@
-
 using System;
-using System.IO;
 using System.Net;
 using System.Text;
 using UnityEngine;
-using Random = System.Random;
 
-namespace Halodi.PackageRegistry.NPM
+namespace PackageCredentials.NPM
 {
     [System.Serializable]
     internal class NPMLoginRequest

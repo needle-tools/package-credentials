@@ -1,4 +1,4 @@
-namespace Halodi.PackageRegistry.NPM
+namespace PackageCredentials.NPM
 {
     [System.Serializable]
     public class NPMResponse

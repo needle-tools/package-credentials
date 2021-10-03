@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +7,7 @@ using Tomlyn.Model;
 using Tomlyn.Syntax;
 using UnityEngine;
 
-namespace Halodi.PackageRegistry.Core
+namespace PackageCredentials.Core
 {
     public class NPMCredential
     {

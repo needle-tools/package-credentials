@@ -1,29 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Halodi.PackageRegistry.Core;
+using PackageCredentials.Core;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Halodi.PackageRegistry.UI
+namespace PackageCredentials.UI
 {
-    public class CredentialManagerView : EditorWindow
+    public class CredentialManagerView
     {
-
-        private ReorderableList drawer;
-        
-        void OnEnable()
-        {
-            drawer = GetCredentialList(new CredentialManager());
-            minSize = new Vector2(640, 320);
-        }
-
-        void OnGUI()
-        {
-            drawer.DoLayoutList();
-        }
-
         internal static ReorderableList GetCredentialList(CredentialManager credentialManager)
         {
             ReorderableList credentialList = null;
