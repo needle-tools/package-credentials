@@ -1,15 +1,15 @@
 {
-  "name": "com.halodi.halodi-unity-package-registry-manager",
+  "name": "com.needle.package-credentials",
   "version": "1.0.0",
-  "displayName": "Halodi Package Registry Manager",
+  "displayName": "Package Credentials",
   "type": "tool",
   "samples": [],
   "description": "Simple tool to manage scoped registries and NPM credentials.",
   "license": "Apache-2.0",
   "author": {
-    "name": "Halodi",
-    "email": "jesper@halodi.com",
-    "url": "https://halodi.com"
+    "name": "Needle",
+    "email": "hi@needle.tools",
+    "url": "https://needle.tools"
   },
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "2.0.0",
@@ -20,6 +20,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Halodi/halodi-unity-package-registry-manager.git"
+    "url": "https://github.com/needle-tools/package-credentials.git"
   }
 }
