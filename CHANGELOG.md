@@ -1,7 +1,11 @@
-# ChangeLog
+# Changelog
+All notable changes to this package will be documented in this file.
 
-## 1.1.0 - 2021-10-03
-- Started Needle fork that strips away all publishing-related tools and only keeps credentials
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 0.0.1 - 2020-05-11
+## [1.1.0] - 2021-10-03
+- Needle fork that strips away all publishing-related tools and only keeps credentials/authentication.
+
+## [0.0.1] - 2020-05-11
 - Package created
