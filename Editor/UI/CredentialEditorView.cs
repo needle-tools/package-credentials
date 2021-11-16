@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Editor.Utils;
 using Needle.PackageCredentials.Core;
 using UnityEditor;
 using UnityEngine;
@@ -49,10 +51,19 @@ namespace Needle.PackageCredentials.UI
             this.initialized = true;
         }
 
+        private readonly ParseHelper npmHelper = new ParseHelper();
+
         void OnGUI()
         {
             if (initialized)
             {
+                if (npmHelper.TryParseNpmCredentialsFromClipboard(out var reg, out var tok))
+                {
+                    registry.url = reg;
+                    registry.token = tok;
+                    registry.auth = true;
+                }
+                
                 if (createNew)
                 {
                     EditorGUILayout.LabelField("Add credential", EditorStyles.whiteLargeLabel);
@@ -71,6 +82,7 @@ namespace Needle.PackageCredentials.UI
                 }
 
                 registry.auth = EditorGUILayout.Toggle("Always auth", registry.auth);
+                
                 registry.token = EditorGUILayout.TextField("Token", registry.token);
 
                 EditorGUILayout.Space();
