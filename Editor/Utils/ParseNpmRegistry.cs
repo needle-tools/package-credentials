@@ -30,7 +30,7 @@ namespace Editor.Utils
 						reg = "https:" + reg;
 
 					token = token.Trim();
-					reg = reg.Trim();
+					reg = reg.Trim().TrimEnd('/');
 					return true;
 				}
 			}
