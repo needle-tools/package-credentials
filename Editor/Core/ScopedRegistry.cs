@@ -11,7 +11,7 @@ namespace Needle.PackageCredentials.Core
         public string url;
         public List<string> scopes = new List<string>();
 
-        public bool auth;
+        public bool auth = true;
 
         public string token;
 
