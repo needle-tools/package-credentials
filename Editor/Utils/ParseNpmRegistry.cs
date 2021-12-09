@@ -18,7 +18,6 @@ namespace Editor.Utils
 			if (cb == lastClipboardStringFound) return false;
 			// cb = "npm config set //packages.needle.tools/:_authToken \"...\"";
 			lastClipboardStringFound = cb;
-			const string tokenStartMarker = ":_authToken \"";
 
 			var match = npmCredentials.Match(cb);
 			if (match.Success)
@@ -32,6 +31,7 @@ namespace Editor.Utils
 				return true;
 			}
 			
+			// const string tokenStartMarker = ":_authToken \"";
 			// var tokenIndexStart = cb.IndexOf(tokenStartMarker, StringComparison.Ordinal);
 			// if (tokenIndexStart > 0)
 			// {
