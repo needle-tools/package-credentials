@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Needle.PackageCredentials.UI
 {
-    class CredentialEditorView : EditorWindow
+    internal class CredentialEditorView : EditorWindow
     {
         private bool initialized = false;
 
@@ -52,82 +52,91 @@ namespace Needle.PackageCredentials.UI
         }
 
         private readonly ParseHelper npmHelper = new ParseHelper();
+        private bool didPasteFromClipboard = false;
 
-        void OnGUI()
+        private void OnGUI()
         {
-            if (initialized)
+            if (!initialized) return;
+            
+            if (npmHelper.TryParseNpmCredentialsFromClipboard(out var reg, out var tok))
             {
-                if (npmHelper.TryParseNpmCredentialsFromClipboard(out var reg, out var tok))
-                {
-                    registry.url = reg;
-                    registry.token = tok;
-                    registry.auth = true;
-                }
+                didPasteFromClipboard = true;
+                registry.url = reg;
+                registry.token = tok;
+                registry.auth = true;
+            }
+            
+            if (createNew)
+            {
+                EditorGUILayout.LabelField("Add credential", EditorStyles.boldLabel);
+                registry.url = EditorGUILayout.TextField("Registry URL", registry.url);
+            }
+            else
+            {
+                EditorGUILayout.LabelField("Edit credential", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Registry URL: " + registry.url);
+            }
                 
-                if (createNew)
-                {
-                    EditorGUILayout.LabelField("Add credential", EditorStyles.whiteLargeLabel);
+            if(string.IsNullOrEmpty(registry.url))
+            {
+                EditorGUILayout.HelpBox("Enter the registry URL you want to add authentication for.", MessageType.Warning);
+            }
 
-                    registry.url = EditorGUILayout.TextField("Registry URL", registry.url);
-                }
-                else
-                {
-                    EditorGUILayout.LabelField("Edit credential", EditorStyles.whiteLargeLabel);
-                    EditorGUILayout.LabelField("Registry URL: " + registry.url);
-                }
-                
-                if(string.IsNullOrEmpty(registry.url))
-                {
-                    EditorGUILayout.HelpBox("Enter the registry URL you want to add authentication for.", MessageType.Warning);
-                }
+            registry.auth = EditorGUILayout.Toggle("Always auth", registry.auth);
+            registry.token = EditorGUILayout.TextField("Token", registry.token);
 
-                registry.auth = EditorGUILayout.Toggle("Always auth", registry.auth);
-                
-                registry.token = EditorGUILayout.TextField("Token", registry.token);
-
+            if (didPasteFromClipboard)
+            {
                 EditorGUILayout.Space();
+                EditorGUILayout.HelpBox("Looking good! Credentials have been added from your clipboard ✂ You can save now.", MessageType.Info);
+            }
 
+
+            if (!didPasteFromClipboard)
+            {
+                EditorGUILayout.Space();
                 EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(registry.url));
-                tokenMethod = GetTokenView.CreateGUI(tokenMethod, registry);
+                tokenMethod = GetTokenView.OnCreateGUI(tokenMethod, registry, !string.IsNullOrWhiteSpace(registry.token));
                 
                 if (!string.IsNullOrEmpty(registry.url) && string.IsNullOrEmpty(registry.token))
                 {
                     EditorGUILayout.HelpBox("Select an authentication method and click on \"Get token\"", MessageType.Warning);
                 }
-                
-                EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(registry.token));
-                
-                EditorGUILayout.Space();
-                EditorGUILayout.BeginVertical(GUILayout.ExpandHeight(true));
-                EditorGUILayout.EndVertical();
-
-                EditorGUILayout.HelpBox("Restart Unity to reload credentials after saving.", MessageType.Info);
-                EditorGUILayout.BeginHorizontal();
-                if (createNew)
-                {
-                    if (GUILayout.Button("Add"))
-                    {
-                        Save();
-                    }
-                }
-                else
-                {
-                    if (GUILayout.Button("Save"))
-                    {
-                        Save();
-                    }
-                }
-                
                 EditorGUI.EndDisabledGroup();
-                EditorGUI.EndDisabledGroup();
-
-                if (GUILayout.Button("Cancel"))
-                {
-                    Close();
-                    GUIUtility.ExitGUI();
-                }
-                EditorGUILayout.EndHorizontal();
             }
+                
+
+                
+            EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(registry.token));
+            EditorGUILayout.Space();
+            EditorGUILayout.BeginVertical(GUILayout.ExpandHeight(true));
+            EditorGUILayout.EndVertical();
+
+            EditorGUILayout.HelpBox("Restart Unity to reload credentials after saving.", MessageType.Info);
+            EditorGUILayout.BeginHorizontal();
+            // if (createNew)
+            // {
+            //     if (GUILayout.Button("Add"))
+            //     {
+            //         Save();
+            //     }
+            // }
+            // else
+            {
+                if (GUILayout.Button("Save"))
+                {
+                    Save();
+                }
+            }
+                
+            EditorGUI.EndDisabledGroup();
+
+            if (GUILayout.Button("Cancel"))
+            {
+                Close();
+                GUIUtility.ExitGUI();
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
         private void Save()

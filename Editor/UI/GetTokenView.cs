@@ -128,9 +128,9 @@ namespace Needle.PackageCredentials.UI
         }
 
 
-        internal static int CreateGUI(int selectedIndex, ScopedRegistry registry)
+        internal static int OnCreateGUI(int selectedIndex, ScopedRegistry registry, bool hasTokenEntered)
         {
-            EditorGUILayout.LabelField("Generate token", EditorStyles.whiteLargeLabel);
+            EditorGUILayout.LabelField(new GUIContent("Generate token"), EditorStyles.boldLabel);
             EditorGUILayout.BeginHorizontal();
             selectedIndex = EditorGUILayout.Popup(new GUIContent("Method"), selectedIndex, methods);
 
