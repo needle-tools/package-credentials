@@ -22,14 +22,13 @@ namespace Needle.PackageCredentials.UI
                 label = "Credentials",
                 activateHandler = (str, v) =>
                 {
-                    registryManager = new RegistryManager();
+                    registryManager = RegistryManager.Instance;
                     credentialDrawer = CredentialManagerView.GetCredentialList(registryManager.credentialManager);
                 },
                 guiHandler = (searchContext) =>
                 {
                     ThirdPartyInfo();
-                    if(registryManager != null)
-                        AutoSetup.TryAddCredentialFromClipboardAutomatically(registryManager);
+                    AutoSetupRegistry.TryAddCredentialFromClipboardAutomatically();
                     EditorGUILayout.Space();
                     credentialDrawer.DoLayoutList();
                 },

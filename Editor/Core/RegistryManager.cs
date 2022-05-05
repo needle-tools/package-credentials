@@ -9,6 +9,16 @@ namespace Needle.PackageCredentials.Core
 {
     public class RegistryManager
     {
+        private static RegistryManager _instance;
+        public static RegistryManager Instance
+        {
+            get
+            {
+                _instance ??= new RegistryManager();
+                return _instance;
+            }
+        }
+        
         private string manifest = Path.Combine(Application.dataPath, "..", "Packages", "manifest.json");
 
         public List<ScopedRegistry> registries
