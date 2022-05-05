@@ -14,7 +14,7 @@ namespace Needle.PackageCredentials.UI
         [SettingsProvider]
         public static SettingsProvider CreateMyCustomSettingsProvider()
         {
-            RegistryManager registryManager;
+            RegistryManager registryManager = default;
             ReorderableList credentialDrawer = null;
             
             var provider = new SettingsProvider("Project/Package Manager/Credentials", SettingsScope.Project)
@@ -28,7 +28,8 @@ namespace Needle.PackageCredentials.UI
                 guiHandler = (searchContext) =>
                 {
                     ThirdPartyInfo();
-                    
+                    if(registryManager != null)
+                        AutoSetup.TryAddCredentialFromClipboardAutomatically(registryManager);
                     EditorGUILayout.Space();
                     credentialDrawer.DoLayoutList();
                 },

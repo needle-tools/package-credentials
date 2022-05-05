@@ -6,16 +6,18 @@ namespace Editor.Utils
 {
 	public class ParseHelper
 	{
-		private static string lastClipboardStringFound;
+		public bool CacheClipboard = true;
+		
+		private string lastClipboardStringFound;
 		// https://regex101.com/r/zqq3io/1
-		private static Regex npmCredentials = new Regex("npm config set (?<registry_url>.+?)((\\/-\\/)|:).*?_authToken \"(?<token>.+)\"");
+		private static readonly Regex npmCredentials = new Regex("npm config set (?<registry_url>.+?)((\\/-\\/)|:).*?_authToken \"(?<token>.+)\"");
 
 		public bool TryParseNpmCredentialsFromClipboard(out string reg, out string token)
 		{
 			var cb = EditorGUIUtility.systemCopyBuffer;
 			reg = null;
 			token = null;
-			if (cb == lastClipboardStringFound) return false;
+			if (CacheClipboard && cb == lastClipboardStringFound) return false;
 			// cb = "npm config set //packages.needle.tools/:_authToken \"...\"";
 			lastClipboardStringFound = cb;
 
