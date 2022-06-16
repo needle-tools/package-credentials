@@ -17,7 +17,7 @@ namespace Editor.Utils
 			var cb = EditorGUIUtility.systemCopyBuffer;
 			reg = null;
 			token = null;
-			if (CacheClipboard && cb == lastClipboardStringFound) return false;
+			// if (CacheClipboard && cb == lastClipboardStringFound) return false;
 			// cb = "npm config set //packages.needle.tools/:_authToken \"...\"";
 			lastClipboardStringFound = cb;
 
